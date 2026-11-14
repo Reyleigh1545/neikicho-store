@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #FFF3F7;
+  --color-light-pink: #F39ABD;
+  --color-primary-pink: #E33D7D;
+  --color-dark-pink: #A51F5E;
+}
+
+body {
+  background-color: #FFF3F7;
+  color: #3B1828;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Custom Pastel Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF3F7;
+}
+::-webkit-scrollbar-thumb {
+  background: #F39ABD;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E33D7D;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #FCE7EF;
+  color: #A51F5E;
+}
+
+/* Glassmorphism & Soft Card Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(247, 207, 222, 0.6);
+}
+
+.pastel-gradient {
+  background: linear-gradient(135deg, #FFF3F7 0%, #FCE7EF 50%, #F8D3E2 100%);
+}
+
+.brand-gradient {
+  background: linear-gradient(135deg, #F39ABD 0%, #E33D7D 50%, #A51F5E 100%);
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, #E33D7D 0%, #A51F5E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+

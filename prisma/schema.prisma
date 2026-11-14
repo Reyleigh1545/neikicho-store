@@ -1,0 +1,228 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Neon / Vercel Postgres connection string
+}
+
+// =============================================================
+// 1. User & Authentication (Customer & Admin Roles)
+// =============================================================
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String    // Hashed with bcryptjs
+  name      String
+  phone     String?
+  address   String?
+  role      String    @default("CUSTOMER") // "CUSTOMER" or "ADMIN"
+  orders    Order[]
+  giftBoxes GiftBox[] // Saved or ordered custom gift boxes
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([role])
+}
+
+// =============================================================
+// 2. Categories (Thermal Cups, Bottles, Candles, Flowers, Socks, Scarves)
+// =============================================================
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  imageKey    String?   // Maps to centralized src/config/images.ts
+  isActive    Boolean   @default(true) // Soft deletion support
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// =============================================================
+// 3. Products & Product Variants (VND Currency as Int)
+// =============================================================
+model Product {
+  id            String           @id @default(cuid())
+  name          String
+  slug          String           @unique
+  description   String
+  price         Int              // Base price in VND (e.g., 220000 = 220,000 VND)
+  stock         Int              @default(20)
+  categoryId    String
+  // Restrict deletion of categories that have active products attached
+  category      Category         @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  imageKey      String?          // Maps to centralized src/config/images.ts
+  isFeatured    Boolean          @default(false)
+  isActive      Boolean          @default(true) // Soft deletion support
+  boxCompatible Boolean          @default(true) // Fits inside custom gift box
+  sizeUnits     Int              @default(1)    // Volume weight for box capacity (1: small, 2: bottle/scarf)
+  variants      ProductVariant[] // Options: colors, scents, sizes
+  orderItems    OrderItem[]
+  giftBoxItems  GiftBoxItem[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  @@index([categoryId])
+  @@index([isFeatured, isActive])
+  @@index([boxCompatible])
+}
+
+model ProductVariant {
+  id           String        @id @default(cuid())
+  productId    String
+  product      Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name         String        // e.g. "Hồng Pastel / 500ml", "Hoa Hồng Bulgaria"
+  color        String?       // e.g. "Hồng Pastel", "Trắng Kem", "Xanh Mint"
+  scent        String?       // e.g. "Hương Hoa Hồng & Mẫu Đơn", "Hương Trà Trắng & Xô Thơm"
+  size         String?       // e.g. "500ml", "400ml", "180g (40h)", "Freesize"
+  price        Int?          // Optional variant price in VND (null inherits Product.price)
+  stock        Int           @default(15)
+  sku          String?       @unique
+  isActive     Boolean       @default(true) // Soft deletion support
+  orderItems   OrderItem[]
+  giftBoxItems GiftBoxItem[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([productId])
+}
+
+// =============================================================
+// 4. Custom Gift Box Customization & Assembly
+// =============================================================
+model GiftBoxOption {
+  id            String    @id @default(cuid())
+  type          String    // "BOX" | "RIBBON" | "CARD"
+  name          String    // e.g. "Hộp Quà Vuông Pastel Hồng", "Ruy Băng Lụa Satin"
+  slug          String    @unique
+  price         Int       @default(0) // Option price in VND
+  imageKey      String?
+  colorHex      String?
+  maxCapacity   Int       @default(4) // Only applicable for "BOX"
+  isActive      Boolean   @default(true) // Soft deletion support
+  boxesAsBase   GiftBox[] @relation("BoxStyleOption")
+  boxesAsRibbon GiftBox[] @relation("RibbonStyleOption")
+  boxesAsCard   GiftBox[] @relation("CardStyleOption")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([type, isActive])
+}
+
+model GiftBox {
+  id             String         @id @default(cuid())
+  userId         String?
+  user           User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  orderItemId    String?        @unique // 1-to-1 link if attached to an OrderItem
+  orderItem      OrderItem?     @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+
+  // Relation links to selected customization options
+  boxOptionId    String?
+  boxOption      GiftBoxOption? @relation("BoxStyleOption", fields: [boxOptionId], references: [id], onDelete: SetNull)
+  ribbonOptionId String?
+  ribbonOption   GiftBoxOption? @relation("RibbonStyleOption", fields: [ribbonOptionId], references: [id], onDelete: SetNull)
+  cardOptionId   String?
+  cardOption     GiftBoxOption? @relation("CardStyleOption", fields: [cardOptionId], references: [id], onDelete: SetNull)
+
+  // Immutable historical snapshots (preserve name & price at purchase time)
+  boxName        String         // e.g. "Hộp Quà Vuông Pastel Hồng"
+  boxPrice       Int            // e.g. 45000 VND
+  ribbonName     String?        // e.g. "Ruy Băng Lụa Hồng Satin"
+  ribbonPrice    Int            @default(0) // e.g. 15000 VND
+  cardName       String?        // e.g. "Thiệp Chúc Mừng Sinh Nhật Pastel"
+  cardPrice      Int            @default(0) // e.g. 10000 VND
+  cardMessage    String?        // Personalized handwritten note (up to 500 chars)
+
+  maxCapacity    Int            @default(4)
+  totalPrice     Int            // Total box price in VND (box + ribbon + card + items)
+
+  items          GiftBoxItem[]  // Items placed inside the box
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([userId])
+}
+
+model GiftBoxItem {
+  id          String          @id @default(cuid())
+  giftBoxId   String
+  giftBox     GiftBox         @relation(fields: [giftBoxId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product         @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variantId   String?
+  variant     ProductVariant? @relation(fields: [variantId], references: [id], onDelete: SetNull)
+
+  // Snapshots at time of adding to box
+  productName String
+  variantName String?
+  quantity    Int             @default(1)
+  price       Int             // Unit price in VND at the time item was added
+  createdAt   DateTime        @default(now())
+
+  @@index([giftBoxId])
+  @@index([productId])
+}
+
+// =============================================================
+// 5. Orders & Historical Purchase-Time Snapshots
+// =============================================================
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique // e.g. "NKC-2026-1042"
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  shippingAddress String
+  city            String?
+  notes           String?
+  status          String      @default("PENDING") // PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELLED
+  paymentMethod   String      @default("COD")     // COD, BANK_TRANSFER, DEMO_CARD
+  paymentStatus   String      @default("PENDING") // PENDING, PAID
+  subtotal        Int         // VND sum of items
+  shippingFee     Int         @default(30000)     // Configurable fee in VND (e.g. 30,000 VND)
+  total           Int         // VND (subtotal + shippingFee)
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id           String          @id @default(cuid())
+  orderId      String
+  order        Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId    String?
+  product      Product?        @relation(fields: [productId], references: [id], onDelete: SetNull)
+  variantId    String?
+  variant      ProductVariant? @relation(fields: [variantId], references: [id], onDelete: SetNull)
+
+  // Immutable historical item snapshot
+  name         String          // Product or custom box title
+  price        Int             // Exact unit price in VND at purchase time
+  quantity     Int             @default(1)
+  isCustomBox  Boolean         @default(false)
+
+  // Historical variant snapshot fields (retains data even if variant is deactivated)
+  variantName  String?         // e.g. "Hồng Pastel / 500ml"
+  variantColor String?         // e.g. "Hồng Pastel"
+  variantSize  String?         // e.g. "500ml"
+  variantScent String?         // e.g. "Hương Hoa Hồng & Mẫu Đơn"
+
+  // Relation to structured custom GiftBox (if custom box item)
+  giftBox      GiftBox?
+
+  // Backup serialized snapshot for instant receipt rendering
+  boxDetails   String?
+  createdAt    DateTime        @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+}
