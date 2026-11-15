@@ -145,7 +145,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
         {/* Customer & Delivery Information */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-2xl bg-nekicho-bg border border-nekicho-border text-xs">
           <div>
-            <h4 className="font-bold text-nekicho-text uppercase tracking-wider text-[10px] mb-1">
+            <h4 className="font-bold text-nekicho-text uppercase tracking-wider text-xs mb-1">
               Giao đến:
             </h4>
             <p className="font-semibold text-nekicho-text">{order.customerName}</p>
@@ -154,7 +154,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
           </div>
 
           <div>
-            <h4 className="font-bold text-nekicho-text uppercase tracking-wider text-[10px] mb-1">
+            <h4 className="font-bold text-nekicho-text uppercase tracking-wider text-xs mb-1">
               Ngày nhận, thiệp và ghi chú:
             </h4>
             <p className="italic text-nekicho-muted whitespace-pre-line">
@@ -214,21 +214,21 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
 
                       {parsedBox.cardMessage && (
                         <div className="p-3 bg-white rounded-xl border border-dashed border-nekicho-border">
-                          <p className="text-[10px] uppercase font-bold text-nekicho-primary">Lời nhắn trên thiệp:</p>
+                          <p className="text-xs uppercase font-bold text-nekicho-primary">Lời nhắn trên thiệp:</p>
                           <p className="italic text-nekicho-text">&ldquo;{parsedBox.cardMessage}&rdquo;</p>
                         </div>
                       )}
 
                       {parsedBox.items && parsedBox.items.length > 0 && (
                         <div>
-                          <p className="text-[10px] uppercase font-bold text-nekicho-muted mb-1">
+                          <p className="text-xs uppercase font-bold text-nekicho-muted mb-1">
                             Món trong hộp:
                           </p>
                           <div className="flex flex-wrap gap-1.5">
                             {parsedBox.items.map((gi: any, idx: number) => (
                               <span
                                 key={idx}
-                                className="px-2.5 py-1 rounded-lg bg-white border border-nekicho-border text-nekicho-text text-[11px] font-medium"
+                                className="px-2.5 py-1 rounded-lg bg-white border border-nekicho-border text-nekicho-text text-xs font-medium"
                               >
                                 {gi.quantity}x {gi.productName || gi.name}{gi.variantName ? ` (${gi.variantName})` : ""}
                               </span>

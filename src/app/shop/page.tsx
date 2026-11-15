@@ -118,7 +118,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                   }`}
                 >
                   <span>{cat.name}</span>
-                  <span className="text-[10px] text-nekicho-muted bg-nekicho-bg px-2 py-0.5 rounded-full">
+                  <span className="text-xs text-nekicho-muted bg-nekicho-bg px-2 py-0.5 rounded-full">
                     {cat._count.products}
                   </span>
                 </Link>

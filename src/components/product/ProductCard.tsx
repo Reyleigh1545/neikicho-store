@@ -55,12 +55,12 @@ export default function ProductCard({
 
           <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
             {category && (
-              <span className="text-[10px] font-bold tracking-wider uppercase bg-white/90 backdrop-blur-md text-nekicho-dark px-2.5 py-1 rounded-full shadow-xs">
+              <span className="text-xs font-bold tracking-wider uppercase bg-white/90 backdrop-blur-md text-nekicho-dark px-2.5 py-1 rounded-full shadow-xs">
                 {category.name}
               </span>
             )}
             {boxCompatible && !isGiftSet && (
-              <span className="text-[10px] font-bold bg-nekicho-primary/90 backdrop-blur-md text-white px-2 py-0.5 rounded-full shadow-xs flex items-center space-x-1 w-max">
+              <span className="text-xs font-bold bg-nekicho-primary/90 backdrop-blur-md text-white px-2 py-0.5 rounded-full shadow-xs flex items-center space-x-1 w-max">
                 <Gift className="w-2.5 h-2.5" />
                 <span>Cho vào hộp được</span>
               </span>
@@ -68,7 +68,7 @@ export default function ProductCard({
           </div>
 
           {stock === 0 && (
-            <span className="absolute bottom-2.5 right-2.5 text-[10px] font-bold bg-gray-500 text-white px-2 py-0.5 rounded-full shadow-xs">
+            <span className="absolute bottom-2.5 right-2.5 text-xs font-bold bg-gray-500 text-white px-2 py-0.5 rounded-full shadow-xs">
               Hết hàng
             </span>
           )}
@@ -89,7 +89,7 @@ export default function ProductCard({
       <div className="mt-4 pt-3 border-t border-nekicho-subtle/60 flex items-center justify-between px-1.5">
         <div>
           <span className="text-xs text-nekicho-muted block font-medium">
-            {isGiftSet ? "Từ" : "Giá"}
+            {isGiftSet ? "Từ (đã gồm hộp, thiệp)" : "Món lẻ, không kèm hộp"}
           </span>
           <span className="text-base font-extrabold text-nekicho-primary">
             {formatVND(price)}

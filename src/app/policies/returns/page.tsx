@@ -13,7 +13,7 @@ export default function ReturnsPolicyPage() {
       <h2>Trường hợp được đổi mới</h2>
       <ul>
         <li>Giao sai món, sai màu hoặc sai mùi so với đơn.</li>
-        <li>Hàng bị móp, vỡ hoặc hỏng trong lúc vận chuyển (ví dụ hũ nến nứt, ly bị móp).</li>
+        <li>Hàng bị hỏng trong lúc vận chuyển (ví dụ hũ nến thủy tinh bị nứt, ly hoặc bình inox bị móp).</li>
         <li>Món nhận được khác rõ với mô tả trên trang sản phẩm.</li>
         <li>Lỗi từ nhà sản xuất (ví dụ khăn bị lỗi sợi, nắp ly không kín).</li>
       </ul>

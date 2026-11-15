@@ -288,7 +288,7 @@ export default function CustomBoxStudio({
                           {box.name}
                         </h3>
                         <p className="text-xs text-nekicho-muted mt-0.5">
-                          Capacity: Holds up to {box.maxCapacity} unit items
+                          Đựng tối đa {box.maxCapacity} món
                         </p>
                         <p className="text-sm font-extrabold text-nekicho-primary mt-2">
                           {formatVND(box.price)}
@@ -333,7 +333,7 @@ export default function CustomBoxStudio({
                         isOverCapacity ? "text-red-500" : "text-nekicho-primary"
                       }`}
                     >
-                      {currentCapacityUsed} / {maxCapacity} chỗ
+                      {currentCapacityUsed} / {maxCapacity} món
                     </span>
                   </div>
                   <div className="w-36 h-2 bg-nekicho-subtle rounded-full overflow-hidden mt-1">
@@ -397,14 +397,11 @@ export default function CustomBoxStudio({
                             fill
                             className="w-full h-full object-cover"
                           />
-                          <span className="absolute top-1.5 right-1.5 text-[9px] font-bold bg-white/90 backdrop-blur-md px-1.5 py-0.5 rounded-full text-nekicho-dark">
-                            {product.sizeUnits} unit
-                          </span>
                         </div>
                         <h4 className="font-bold text-xs text-nekicho-text line-clamp-1">
                           {product.name}
                         </h4>
-                        <p className="text-[11px] text-nekicho-primary font-bold mt-0.5">
+                        <p className="text-xs text-nekicho-primary font-bold mt-0.5">
                           {formatVND(product.price)}
                         </p>
                       </div>
@@ -583,7 +580,7 @@ export default function CustomBoxStudio({
                       <h4 className="font-bold text-xs text-nekicho-text line-clamp-1">
                         {card.name}
                       </h4>
-                      <p className="text-[11px] text-nekicho-primary font-bold mt-1">
+                      <p className="text-xs text-nekicho-primary font-bold mt-1">
                         +{formatVND(card.price)}
                       </p>
                     </div>
@@ -596,7 +593,7 @@ export default function CustomBoxStudio({
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-bold text-nekicho-text flex items-center space-x-1.5">
                     <Heart className="w-3.5 h-3.5 text-nekicho-primary fill-nekicho-primary" />
-                    <span>Lời nhắn của bạn</span>
+                    <span>Lời nhắn của bạn (không bắt buộc)</span>
                   </span>
                   <span className="text-nekicho-muted">{cardMessage.length} / 150</span>
                 </div>
@@ -609,7 +606,7 @@ export default function CustomBoxStudio({
                   className="w-full p-4 rounded-2xl border border-nekicho-border focus:border-nekicho-primary focus:ring-1 focus:ring-nekicho-primary outline-none text-xs sm:text-sm text-nekicho-text leading-relaxed bg-white"
                 />
 
-                <p className="text-[11px] text-nekicho-muted italic">
+                <p className="text-xs text-nekicho-muted italic">
                   Lời nhắn sẽ được in lên thiệp &quot;{selectedCard?.name}&quot; và đặt trong hộp.
                 </p>
               </div>
@@ -691,7 +688,7 @@ export default function CustomBoxStudio({
                         className="flex items-center justify-between p-3 rounded-2xl bg-white border border-nekicho-border text-xs"
                       >
                         <div className="flex items-center space-x-3">
-                          <span className="w-5 h-5 rounded-full bg-nekicho-subtle text-nekicho-primary flex items-center justify-center font-bold text-[10px]">
+                          <span className="w-5 h-5 rounded-full bg-nekicho-subtle text-nekicho-primary flex items-center justify-center font-bold text-xs">
                             {quantity}x
                           </span>
                           <span className="font-semibold text-nekicho-text">
@@ -737,7 +734,7 @@ export default function CustomBoxStudio({
               <span>Tóm tắt hộp</span>
             </h3>
             <span className="text-xs bg-nekicho-subtle text-nekicho-primary font-bold px-2.5 py-0.5 rounded-full">
-              {currentCapacityUsed}/{maxCapacity} chỗ
+              {currentCapacityUsed}/{maxCapacity} món
             </span>
           </div>
 
@@ -753,7 +750,7 @@ export default function CustomBoxStudio({
               <p className="font-bold text-xs text-nekicho-text truncate">
                 {selectedBox?.name}
               </p>
-              <p className="text-[11px] text-nekicho-muted truncate">
+              <p className="text-xs text-nekicho-muted truncate">
                 🎀 {selectedRibbon?.name || "Chưa chọn ruy băng"}
               </p>
             </div>
@@ -761,7 +758,7 @@ export default function CustomBoxStudio({
 
           {/* Selected Items Mini List */}
           <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-            <p className="text-[10px] font-bold text-nekicho-muted uppercase tracking-wider">
+            <p className="text-xs font-bold text-nekicho-muted uppercase tracking-wider">
               Món trong hộp:
             </p>
             {boxItems.length === 0 ? (

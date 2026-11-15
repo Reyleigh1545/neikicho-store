@@ -106,9 +106,20 @@ export default function ProductDetailActions({
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span className="font-extrabold text-sm text-nekicho-text min-w-[1.5rem] text-center">
-            {quantity}
-          </span>
+          {/* Typing a quantity is allowed (round 1: T9) */}
+          <input
+            type="number"
+            inputMode="numeric"
+            min={1}
+            max={maxQty}
+            value={quantity}
+            onChange={(e) => {
+              const n = parseInt(e.target.value, 10);
+              setQuantity(Number.isNaN(n) ? 1 : Math.min(maxQty, Math.max(1, n)));
+            }}
+            aria-label="Số lượng"
+            className="w-12 font-extrabold text-sm text-nekicho-text text-center bg-transparent outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          />
           <button
             onClick={() => setQuantity((q) => Math.min(maxQty, q + 1))}
             className="text-nekicho-muted hover:text-nekicho-primary p-1"
@@ -160,7 +171,7 @@ export default function ProductDetailActions({
           </Link>
         )}
       </div>
-      <p className="text-[11px] text-nekicho-muted">
+      <p className="text-xs text-nekicho-muted">
         Lời nhắn in lên thiệp và ngày muốn nhận hàng được nhập ở bước thanh toán.
       </p>
     </div>

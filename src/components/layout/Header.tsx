@@ -46,7 +46,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <NekiLogo className="h-12 w-auto" />
+          <NekiLogo className="h-14 sm:h-16 w-auto" />
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
@@ -64,7 +64,7 @@ export default function Header() {
                 >
                   <span>{link.name}</span>
                   {link.badge && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-nekicho-primary text-white shadow-soft">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-nekicho-primary text-white shadow-soft">
                       {link.badge}
                     </span>
                   )}
@@ -101,7 +101,7 @@ export default function Header() {
                         <p className="font-bold text-nekicho-text truncate">{user.name}</p>
                         <p className="text-xs text-nekicho-muted truncate">{user.email}</p>
                         {user.role === "ADMIN" && (
-                          <span className="inline-block mt-1 text-[10px] bg-nekicho-primary text-white font-bold px-2 py-0.5 rounded-full">
+                          <span className="inline-block mt-1 text-xs bg-nekicho-primary text-white font-bold px-2 py-0.5 rounded-full">
                             ADMINISTRATOR
                           </span>
                         )}
@@ -146,7 +146,7 @@ export default function Header() {
             >
               <ShoppingBag className="w-5 h-5" />
               {totalItemsCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-nekicho-primary text-white text-[11px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-scaleIn">
+                <span className="absolute -top-1 -right-1 bg-nekicho-primary text-white text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-scaleIn">
                   {totalItemsCount}
                 </span>
               )}
@@ -182,7 +182,7 @@ export default function Header() {
                 <div className="flex items-center justify-between">
                   <span>{link.name}</span>
                   {link.badge && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-nekicho-primary text-white">
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-nekicho-primary text-white">
                       {link.badge}
                     </span>
                   )}

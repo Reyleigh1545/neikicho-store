@@ -73,6 +73,32 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Save to local storage on change
+  // Keep the cart in sync when the same store is open in another tab, or when the
+  // browser restores a page from its back/forward cache (round 1: T6 saw a removed
+  // item come back). The newest saved cart always wins.
+  useEffect(() => {
+    const reload = () => {
+      try {
+        const stored = localStorage.getItem(CART_STORAGE_KEY);
+        setItems(stored ? JSON.parse(stored) : []);
+      } catch {
+        /* ignore */
+      }
+    };
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === CART_STORAGE_KEY) reload();
+    };
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) reload();
+    };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("pageshow", onPageShow);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("pageshow", onPageShow);
+    };
+  }, []);
+
   useEffect(() => {
     if (isLoaded) {
       try {

@@ -30,7 +30,7 @@ export default function NekiLogo({
             Neki<span className="text-nekicho-primary">Cho</span>
           </span>
           {showTagline && (
-            <span className="text-[9px] font-bold tracking-widest text-nekicho-muted uppercase">
+            <span className="text-xs font-bold tracking-widest text-nekicho-muted uppercase">
               Handcrafted Gifts
             </span>
           )}

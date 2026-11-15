@@ -34,8 +34,8 @@ export default function DeliveryPolicyPage() {
       <ul>
         <li>Mọi món đều mới, còn nguyên tem.</li>
         <li>
-          Quà được đặt trong hộp cứng NekiCho, lót giấy và xốp chống sốc. Món dễ vỡ (hũ nến thủy tinh, ly, bình) được
-          bọc riêng.
+          Quà được đặt trong hộp cứng NekiCho, lót giấy và xốp chống sốc. Món dễ vỡ duy nhất là hũ nến thủy tinh, được
+          bọc riêng. Ly và bình giữ nhiệt bằng inox không dễ vỡ nhưng có thể móp, nên được chèn chặt để không xê dịch.
         </li>
         <li>Hộp được cho vào túi giấy có quai trước khi giao.</li>
       </ul>

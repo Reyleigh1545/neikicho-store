@@ -297,7 +297,7 @@ export default function CheckoutPage() {
                 <span className="w-6 h-6 rounded-full bg-nekicho-subtle text-nekicho-primary flex items-center justify-center text-xs">
                   2
                 </span>
-                <span>Lời nhắn in lên thiệp</span>
+                <span>Lời nhắn in lên thiệp <span className="font-normal text-nekicho-muted">(không bắt buộc)</span></span>
               </h2>
               <textarea
                 id="cardMessage"
@@ -309,7 +309,7 @@ export default function CheckoutPage() {
                 placeholder="VD: Chúc mẹ Giáng sinh ấm áp!"
                 className={inputClass}
               />
-              <p className="text-[11px] text-nekicho-muted flex justify-between">
+              <p className="text-xs text-nekicho-muted flex justify-between">
                 <span>Thiệp in sẵn, đặt trong hộp. Trong hộp không ghi giá tiền.</span>
                 <span>
                   {formData.cardMessage.length} / {CARD_MESSAGE_MAX}
@@ -409,12 +409,12 @@ export default function CheckoutPage() {
                         {formatVND(item.price * item.quantity)}
                       </span>
                     </div>
-                    <p className="text-[11px] text-nekicho-muted">
+                    <p className="text-xs text-nekicho-muted">
                       SL: {item.quantity} × {formatVND(item.price)}
                     </p>
 
                     {item.isCustomBox && item.boxDetails && (
-                      <div className="mt-1 text-[11px] text-nekicho-muted space-y-0.5">
+                      <div className="mt-1 text-xs text-nekicho-muted space-y-0.5">
                         <p>Ruy băng: {item.boxDetails.ribbonName || "không"}</p>
                         <p>Thiệp: {item.boxDetails.cardName || "không"}</p>
                         <p className="text-nekicho-primary font-medium">
@@ -443,7 +443,7 @@ export default function CheckoutPage() {
                 </span>
               </div>
               {shippingFee > 0 && (
-                <p className="text-[11px] text-nekicho-muted">
+                <p className="text-xs text-nekicho-muted">
                   Miễn phí giao hàng cho đơn từ {formatVND(SHOP_CONFIG.freeShippingThreshold)}.
                 </p>
               )}
@@ -470,7 +470,7 @@ export default function CheckoutPage() {
               )}
             </button>
 
-            <p className="text-[11px] text-nekicho-muted flex items-center justify-center space-x-1 text-center">
+            <p className="text-xs text-nekicho-muted flex items-center justify-center space-x-1 text-center">
               <ShieldCheck className="w-3.5 h-3.5 text-nekicho-primary" />
               <span>Test mode · Không thu tiền · Xem <Link href="/policies/privacy" className="underline">quyền riêng tư</Link></span>
             </p>

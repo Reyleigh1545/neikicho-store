@@ -2,8 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import NekiImage from "@/components/ui/NekiImage";
-import { getProductAsset } from "@/config/images";
+import ProductGallery from "@/components/product/ProductGallery";
+import { getProductAsset, PRODUCT_IMAGES } from "@/config/images";
 import ProductDetailActions from "@/components/product/ProductDetailActions";
 import ProductCard from "@/components/product/ProductCard";
 import { formatVND, SHOP_CONFIG } from "@/config/shop";
@@ -55,6 +55,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     product.name,
     product.category.name
   );
+  const isGiftSet = product.category.slug === "gift-sets";
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
@@ -84,25 +85,17 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         {/* Product Image Gallery Frame */}
         <div className="lg:col-span-6">
-          <div className="bg-white rounded-3xl p-4 border border-nekicho-border shadow-elevated">
-            <div className="relative aspect-square rounded-2xl overflow-hidden bg-nekicho-bg border border-nekicho-subtle">
-              <NekiImage
-                src={asset.src}
-                alt={product.name}
-                category={product.category.name}
-                fill
-                priority
-                className="w-full h-full object-cover"
-              />
-
-              {product.boxCompatible && (
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-nekicho-primary shadow-soft flex items-center space-x-1.5 border border-nekicho-border">
-                  <Gift className="w-3.5 h-3.5" />
-                  <span>Cho được vào hộp tự chọn</span>
-                </div>
-              )}
-            </div>
-          </div>
+          <ProductGallery
+            images={
+              isGiftSet
+                ? [
+                    { src: asset.src, alt: asset.alt || product.name, caption: "Các món bạn có thể chọn trong hộp này" },
+                    { src: PRODUCT_IMAGES["box-closed"].src, alt: PRODUCT_IMAGES["box-closed"].alt, caption: "Bên ngoài: hộp cứng NekiCho màu hồng" },
+                    { src: PRODUCT_IMAGES["box-open-empty"].src, alt: PRODUCT_IMAGES["box-open-empty"].alt, caption: "Bên trong: lót giấy chống sốc, đặt món và thiệp" },
+                  ]
+                : [{ src: asset.src, alt: asset.alt || product.name, caption: product.name }]
+            }
+          />
         </div>
 
         {/* Product Details & Purchase Actions */}
@@ -114,6 +107,19 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <h1 className="text-2xl sm:text-3xl font-extrabold text-nekicho-text mt-3">
               {product.name}
             </h1>
+            {!isGiftSet && (
+              <div className="mt-3 p-3 rounded-2xl bg-nekicho-bg border border-nekicho-border text-sm text-nekicho-text">
+                <strong>Món lẻ:</strong> giá này là của riêng món, không kèm hộp quà và thiệp. Muốn có hộp và thiệp, hãy chọn{" "}
+                <Link href="/shop?category=gift-sets" className="underline text-nekicho-primary font-semibold">
+                  hộp làm sẵn
+                </Link>{" "}
+                (từ 159.000 ₫, giá đã gồm hộp và thiệp) hoặc{" "}
+                <Link href="/custom-box" className="underline text-nekicho-primary font-semibold">
+                  tự ghép hộp
+                </Link>
+                .
+              </div>
+            )}
             <div className="flex items-baseline space-x-3 mt-2">
               <span className="text-3xl font-extrabold text-nekicho-primary">
                 {product.variants.length > 1 &&
@@ -154,7 +160,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
             <div className="flex items-start space-x-2">
               <ShieldCheck className="w-4 h-4 text-nekicho-primary flex-shrink-0 mt-0.5" />
-              <span>Hộp cứng, lót giấy và xốp chống sốc; món dễ vỡ được bọc riêng.</span>
+              <span>Hộp cứng, lót giấy và xốp chống sốc. Hũ nến thủy tinh được bọc riêng chống vỡ; ly và bình inox được chèn chặt chống móp.</span>
             </div>
             <div className="flex items-start space-x-2">
               <RotateCcw className="w-4 h-4 text-nekicho-primary flex-shrink-0 mt-0.5" />

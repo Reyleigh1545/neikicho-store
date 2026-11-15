@@ -86,7 +86,7 @@ export default async function HomePage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="text-[11px] text-nekicho-muted text-center mt-2">
+              <p className="text-xs text-nekicho-muted text-center mt-2">
                 Ảnh minh họa của concept. Mỗi hộp thật chỉ có 1–2 món bạn chọn.
               </p>
             </div>

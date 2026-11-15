@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Slightly larger base text on phones (round 1: T2 found the font small).
+   All Tailwind sizes are in rem, so this scales every text size. */
+html {
+  font-size: 17px;
+}
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 :root {
   --bg-primary: #FFF3F7;
   --color-light-pink: #F39ABD;

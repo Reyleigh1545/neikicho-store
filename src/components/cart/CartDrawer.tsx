@@ -116,7 +116,7 @@ export default function CartDrawer() {
                     {item.isCustomBox ? (
                       <div className="w-full h-full flex flex-col items-center justify-center bg-nekicho-subtle text-nekicho-primary p-2 text-center">
                         <Gift className="w-7 h-7 mb-1" />
-                        <span className="text-[10px] font-bold tracking-tight uppercase">Hộp tự ghép</span>
+                        <span className="text-xs font-bold tracking-tight uppercase">Hộp tự ghép</span>
                       </div>
                     ) : (
                       <NekiImage
@@ -148,7 +148,7 @@ export default function CartDrawer() {
                         <div className="mt-1 text-xs text-nekicho-muted space-y-0.5">
                           <p className="truncate">🎀 Ruy băng: {item.boxDetails.ribbonName || "không"}</p>
                           <p className="truncate">💌 Thiệp: {item.boxDetails.cardName || "không"}</p>
-                          <p className="text-[11px] text-nekicho-primary font-medium">
+                          <p className="text-xs text-nekicho-primary font-medium">
                             {item.boxDetails.items.length} món trong hộp
                           </p>
                         </div>
