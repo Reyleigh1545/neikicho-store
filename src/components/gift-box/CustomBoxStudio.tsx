@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import confetti from "canvas-confetti";
 import {
   Gift,
@@ -104,6 +105,10 @@ export default function CustomBoxStudio({
     0
   );
   const maxCapacity = selectedBox ? selectedBox.maxCapacity : 4;
+  // A custom box needs at least 2 items; a 1-item gift is the ready-made set (round 1: T5)
+  const MIN_BOX_ITEMS = 2;
+  const totalItemCount = boxItems.reduce((acc, curr) => acc + curr.quantity, 0);
+  const notEnoughItems = totalItemCount < MIN_BOX_ITEMS;
   const isOverCapacity = currentCapacityUsed > maxCapacity;
 
   const boxBasePrice = selectedBox ? selectedBox.price : 0;
@@ -145,8 +150,8 @@ export default function CustomBoxStudio({
 
   // Add Complete Box to Cart
   const handleAddBoxToCart = () => {
-    if (boxItems.length === 0) {
-      alert("Hãy chọn ít nhất 1 món cho vào hộp.");
+    if (notEnoughItems) {
+      alert("Hộp tự ghép cần ít nhất 2 món. Muốn tặng 1 món, hãy chọn hộp làm sẵn (từ 159.000 ₫).");
       setCurrentStep(2);
       return;
     }
@@ -451,6 +456,16 @@ export default function CustomBoxStudio({
                 })}
               </div>
 
+              {notEnoughItems && (
+                <div className="p-3 rounded-2xl bg-nekicho-bg border border-nekicho-border text-sm text-nekicho-text">
+                  Hộp tự ghép cần <strong>ít nhất 2 món</strong> (đang có {totalItemCount}). Muốn tặng 1 món?{" "}
+                  <Link href="/shop?category=gift-sets" className="underline text-nekicho-primary font-semibold">
+                    Chọn hộp làm sẵn
+                  </Link>{" "}
+                  từ 159.000 ₫, đã gồm hộp và thiệp.
+                </div>
+              )}
+
               {/* Navigation */}
               <div className="flex justify-between pt-4 border-t border-nekicho-subtle">
                 <button
@@ -462,9 +477,9 @@ export default function CustomBoxStudio({
                 </button>
                 <button
                   onClick={() => setCurrentStep(3)}
-                  disabled={boxItems.length === 0}
+                  disabled={notEnoughItems}
                   className={`px-6 py-3 rounded-full text-white font-bold text-xs flex items-center space-x-2 shadow-soft transition ${
-                    boxItems.length === 0
+                    notEnoughItems
                       ? "bg-gray-300 cursor-not-allowed"
                       : "bg-nekicho-primary hover:bg-nekicho-dark"
                   }`}
@@ -815,9 +830,9 @@ export default function CustomBoxStudio({
           {/* Direct CTA */}
           <button
             onClick={handleAddBoxToCart}
-            disabled={boxItems.length === 0}
+            disabled={notEnoughItems}
             className={`w-full py-3.5 px-4 rounded-full font-bold text-xs flex items-center justify-center space-x-2 shadow-soft transition ${
-              boxItems.length === 0
+              notEnoughItems
                 ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                 : "bg-nekicho-primary hover:bg-nekicho-dark text-white"
             }`}

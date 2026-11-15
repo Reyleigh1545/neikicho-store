@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
           },
         });
 
-        const boxPrice = boxOpt ? boxOpt.price : 45000;
+        const boxPrice = boxOpt ? boxOpt.price : 60000;
         const maxCapacity = boxOpt ? boxOpt.maxCapacity : 4;
 
         // Fetch selected ribbon
@@ -112,6 +112,20 @@ export async function POST(req: NextRequest) {
             cardPrice = cardOpt.price;
             cardName = cardOpt.name;
           }
+        }
+
+        // A custom box needs at least 2 items (same rule as the builder)
+        const requestedCount = Array.isArray(boxDetails.items)
+          ? boxDetails.items.reduce(
+              (acc: number, it: any) => acc + Math.max(1, parseInt(it.quantity) || 1),
+              0
+            )
+          : 0;
+        if (requestedCount < 2) {
+          return NextResponse.json(
+            { error: "Hộp tự ghép cần ít nhất 2 món. Muốn tặng 1 món, hãy chọn hộp làm sẵn." },
+            { status: 400 }
+          );
         }
 
         // Validate included items inside the box
