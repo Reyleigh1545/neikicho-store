@@ -39,7 +39,7 @@ export default async function HomePage() {
               </h1>
 
               <p className="text-base sm:text-lg text-nekicho-muted max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                3 hộp làm sẵn cho mẹ, người thương, bạn bè &amp; người thân. Mỗi hộp chỉ 1–2 món dùng được thật, ghi rõ
+                3 hộp làm sẵn cho mẹ, người thương, bạn bè &amp; người thân. Mỗi hộp làm sẵn có 1–2 món dùng được thật, ghi rõ
                 chất liệu và kích thước, kèm thiệp in lời nhắn của bạn.
               </p>
 
@@ -87,7 +87,7 @@ export default async function HomePage() {
                 />
               </div>
               <p className="text-xs text-nekicho-muted text-center mt-2">
-                Ảnh minh họa của concept. Mỗi hộp thật chỉ có 1–2 món bạn chọn.
+                Ảnh minh họa của concept. Hộp làm sẵn có 1–2 món; hộp tự ghép có 2–5 món tùy cỡ hộp.
               </p>
             </div>
           </div>
@@ -187,7 +187,7 @@ export default async function HomePage() {
         <div className="rounded-3xl bg-gradient-to-r from-nekicho-subtle via-nekicho-cream to-nekicho-bg border border-nekicho-border p-8 md:p-10 text-center space-y-4">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-nekicho-text">Muốn tự chọn từng món?</h2>
           <p className="text-sm text-nekicho-muted max-w-2xl mx-auto">
-            Chọn cỡ hộp, bỏ các món lẻ vào, chọn ruy băng và viết lời nhắn. Giá = giá hộp + giá từng món.
+            Chọn cỡ hộp (tiêu chuẩn 2–3 món, cỡ lớn 2–5 món), bỏ các món lẻ vào, chọn ruy băng và viết lời nhắn. Giá = giá hộp + giá từng món.
           </p>
           <Link
             href="/custom-box"

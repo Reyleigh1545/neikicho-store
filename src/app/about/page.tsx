@@ -18,7 +18,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {[
             { icon: Gift, t: "Chọn theo người nhận", d: "3 hộp làm sẵn cho mẹ, người thương, bạn bè & người thân." },
-            { icon: Heart, t: "Ít món nhưng dùng được", d: "Mỗi hộp chỉ 1–2 món thực dụng, không nhồi đồ trang trí." },
+            { icon: Heart, t: "Ít món nhưng dùng được", d: "Hộp làm sẵn chỉ 1–2 món thực dụng (hộp tự ghép 2–5 món), không nhồi đồ trang trí." },
             { icon: Eye, t: "Thấy rõ từng món", d: "Ghi chất liệu, kích thước, màu và mùi của mỗi món." },
             { icon: Truck, t: "Giao đúng ngày", d: "Chọn ngày nhận khi đặt, hộp cứng lót chống sốc." },
           ].map(({ icon: Icon, t, d }) => (

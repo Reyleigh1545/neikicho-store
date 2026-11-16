@@ -54,7 +54,7 @@ export default function Footer() {
             <div className="space-y-3">
               <NekiLogo className="h-10 w-auto" />
               <p className="text-xs text-nekicho-muted leading-relaxed">
-                NekiCho làm hộp quà theo dịp lễ cho sinh viên và người mới đi làm ở Hà Nội: mỗi hộp chỉ 1–2 món dùng
+                NekiCho làm hộp quà theo dịp lễ cho sinh viên và người mới đi làm ở Hà Nội: mỗi hộp làm sẵn chỉ 1–2 món dùng
                 được, kèm thiệp in lời nhắn của bạn.
               </p>
             </div>
