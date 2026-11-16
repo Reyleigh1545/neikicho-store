@@ -150,7 +150,7 @@ export default function CheckoutPage() {
         </p>
         <div className="pt-2">
           <Link
-            href="/shop?category=gift-sets"
+            href="/gift-sets"
             className="inline-block px-6 py-3 bg-nekicho-primary text-white rounded-full text-xs font-bold shadow-soft hover:bg-nekicho-dark transition"
           >
             Xem 3 hộp quà

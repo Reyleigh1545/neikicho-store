@@ -459,7 +459,7 @@ export default function CustomBoxStudio({
               {notEnoughItems && (
                 <div className="p-3 rounded-2xl bg-nekicho-bg border border-nekicho-border text-sm text-nekicho-text">
                   Hộp tự ghép cần <strong>ít nhất 2 món</strong> (đang có {totalItemCount}). Muốn tặng 1 món?{" "}
-                  <Link href="/shop?category=gift-sets" className="underline text-nekicho-primary font-semibold">
+                  <Link href="/gift-sets" className="underline text-nekicho-primary font-semibold">
                     Chọn hộp làm sẵn
                   </Link>{" "}
                   từ 159.000 ₫, đã gồm hộp và thiệp.

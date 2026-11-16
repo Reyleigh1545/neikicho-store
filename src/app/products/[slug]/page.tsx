@@ -110,7 +110,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             {!isGiftSet && (
               <div className="mt-3 p-3 rounded-2xl bg-nekicho-bg border border-nekicho-border text-sm text-nekicho-text">
                 <strong>Món lẻ:</strong> giá này là của riêng món, không kèm hộp quà và thiệp. Muốn có hộp và thiệp, hãy chọn{" "}
-                <Link href="/shop?category=gift-sets" className="underline text-nekicho-primary font-semibold">
+                <Link href="/gift-sets" className="underline text-nekicho-primary font-semibold">
                   hộp làm sẵn
                 </Link>{" "}
                 (từ 159.000 ₫, giá đã gồm hộp và thiệp) hoặc{" "}

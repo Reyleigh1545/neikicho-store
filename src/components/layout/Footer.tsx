@@ -63,7 +63,7 @@ export default function Footer() {
               <h3 className="text-xs font-bold text-nekicho-text uppercase tracking-wider mb-3">Mua sắm</h3>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <Link href="/shop?category=gift-sets" className="text-nekicho-muted hover:text-nekicho-primary transition font-semibold">
+                  <Link href="/gift-sets" className="text-nekicho-muted hover:text-nekicho-primary transition font-semibold">
                     3 hộp quà theo người nhận
                   </Link>
                 </li>

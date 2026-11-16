@@ -59,6 +59,9 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     }),
   ]);
 
+  // Show the filtered category's own name (round 2: T11)
+  const activeCategory = category ? categories.find((c) => c.slug === category) : undefined;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Page Header */}
@@ -68,10 +71,11 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             NekiCho
           </span>
           <h1 className="text-3xl font-extrabold text-nekicho-text mt-1">
-            Hộp quà và món lẻ
+            {activeCategory ? activeCategory.name : "Tất cả sản phẩm"}
           </h1>
           <p className="text-xs sm:text-sm text-nekicho-muted mt-1">
-            Chọn 1 trong 3 hộp làm sẵn, hoặc mua từng món để tự ghép hộp.
+            {activeCategory?.description ||
+              "Chọn 1 trong 3 hộp làm sẵn, hoặc mua từng món để tự ghép hộp."}
           </p>
         </div>
 

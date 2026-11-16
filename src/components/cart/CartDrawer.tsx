@@ -90,7 +90,7 @@ export default function CartDrawer() {
                 </p>
                 <div className="flex flex-col gap-2 w-full max-w-xs">
                   <Link
-                    href="/shop?category=gift-sets"
+                    href="/gift-sets"
                     onClick={() => setIsCartOpen(false)}
                     className="w-full py-2.5 px-4 bg-nekicho-primary hover:bg-nekicho-dark text-white rounded-full text-sm font-semibold transition text-center shadow-soft"
                   >

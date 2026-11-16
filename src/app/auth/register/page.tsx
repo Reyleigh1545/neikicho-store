@@ -10,7 +10,7 @@ export default function RegisterPage() {
         ngay mà không cần đăng ký.
       </p>
       <Link
-        href="/shop?category=gift-sets"
+        href="/gift-sets"
         className="inline-block px-5 py-2.5 bg-nekicho-primary text-white rounded-full text-xs font-bold"
       >
         Xem 3 hộp quà

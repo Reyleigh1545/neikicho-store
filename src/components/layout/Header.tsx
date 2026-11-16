@@ -27,7 +27,7 @@ export default function Header() {
 
   const navLinks: Array<{ name: string; href: string; badge?: string }> = [
     { name: "Trang chủ", href: "/" },
-    { name: "3 hộp quà", href: "/shop?category=gift-sets" },
+    { name: "3 hộp quà", href: "/gift-sets" },
     { name: "Tất cả sản phẩm", href: "/shop" },
     { name: "Tự ghép hộp", href: "/custom-box" },
     { name: "Chính sách", href: "/policies" },
